@@ -31,13 +31,13 @@
         android:summary="Hex значение" />
 
     <EditTextPreference
-        android:defaultValue="#009688"
+        android:defaultValue="#ffffff"
         android:key="clockTempColor"
         android:title="Цвет часов и температуры"
         android:summary="Hex значение" />
 
     <EditTextPreference
-        android:defaultValue="#1a237e"
+        android:defaultValue="#801a237e"
         android:key="graphBackgroundColor"
         android:title="Цвет фона графика"
         android:summary="Hex значение" />
