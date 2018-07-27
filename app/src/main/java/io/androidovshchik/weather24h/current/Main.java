@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName;
 public class Main {
 
     @SerializedName("temp")
-    public Double temp;
+    public float temp;
     @SerializedName("pressure")
-    public Integer pressure;
+    public float pressure;
     @SerializedName("humidity")
-    public Integer humidity;
+    public float humidity;
     @SerializedName("temp_min")
-    public Double tempMin;
+    public float tempMin;
     @SerializedName("temp_max")
-    public Double tempMax;
+    public float tempMax;
 
 }

@@ -92,11 +92,11 @@ class OverlayLayout : RelativeLayout {
         big_icon.setImageResource(if (icon == 0) R.drawable.ic_02d_big else icon)
         big_icon.drawable.setColorFilter(Color.parseColor(preferences.getString(PREFERENCE_ICON_DATA_COLOR)),
             PorterDuff.Mode.MULTIPLY)
-        data1.text = "${current.main.humidity}%"
+        data1.text = "${Math.round(current.main.humidity)}%"
         data2.text = Math.round(current.main.pressure / 1.333224f).toString() + " мм"
         data3.text = String.format("%.1f", current.wind.speed) + " м/с " + formatBearing(current.wind.deg.toDouble())
         val temp = Math.round(current.main.temp - 273.15)
-        temperature.text = (if (temp > 0) "+" else "") + temp.toString() + " \u2103"
+        temperature.text = (if (temp > 0) "+" else "") + temp + " \u2103"
     }
 
     fun bindStripBottomPart(forecast: Forecast) {
