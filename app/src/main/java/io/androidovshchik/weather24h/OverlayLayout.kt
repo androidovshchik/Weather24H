@@ -31,6 +31,8 @@ class OverlayLayout : RelativeLayout {
 
     private var preferences: Preferences
 
+    val items = ArrayList<Data>()
+
     constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -88,10 +90,22 @@ class OverlayLayout : RelativeLayout {
     @SuppressLint("SetTextI18n")
     fun bindTopPart(current: Current) {
         Timber.d("> bindTopPart")
-        val icon = Data.getIcon(context, current.weather[0].icon)
-        big_icon.setImageResource(if (icon == 0) R.drawable.ic_02d_big else icon)
-        big_icon.drawable.setColorFilter(Color.parseColor(preferences.getString(PREFERENCE_ICON_DATA_COLOR)),
-            PorterDuff.Mode.MULTIPLY)
+        for (i in 0 until items.size) {
+            if (items[i].apiId == current.weather[0].id || i == items.size - 1) {
+                val data = if (i == items.size - 1) {
+                    items[49] // very hardcoded :)
+                } else {
+                    items[i]
+                }
+                val icon = data.getIcon(context.applicationContext)
+                big_icon.setImageResource(if (icon == 0) R.drawable.ic_02d_big else icon)
+                big_icon.drawable.setColorFilter(Color.parseColor(preferences.getString(PREFERENCE_ICON_DATA_COLOR)),
+                    PorterDuff.Mode.MULTIPLY)
+                val background = data.getBackground(context.applicationContext)
+                backgroundImage.setImageResource(if (background == 0) R.drawable.ic_02d1 else background)
+                break
+            }
+        }
         data1.text = "${Math.round(current.main.humidity)}%"
         data2.text = Math.round(current.main.pressure / 1.333224f).toString() + " мм"
         data3.text = String.format("%.1f", current.wind.speed) + " м/с " + formatBearing(current.wind.deg.toDouble())

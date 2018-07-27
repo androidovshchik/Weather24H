@@ -8,6 +8,9 @@ import com.github.androidovshchik.models.Row;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Calendar;
+
+@SuppressWarnings("WeakerAccess")
 public class Data extends Row implements Cloneable {
 
     public static final String COLUMN_API_ID = "api_id";
@@ -32,7 +35,6 @@ public class Data extends Row implements Cloneable {
 
     @Override
     public void parseCursor(Cursor cursor) {
-        setRowId(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ROW_ID)));
         apiId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_API_ID));
         meaning = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEANING));
         iconDay = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ICON_DAY));
@@ -44,27 +46,20 @@ public class Data extends Row implements Cloneable {
     @NotNull
     @Override
     public ContentValues toContentValues() {
-        ContentValues values = new ContentValues();
-        if (getRowId() != NONE) {
-            values.put(COLUMN_ROW_ID, getRowId());
-        }
-        values.put(COLUMN_API_ID, apiId);
-        values.put(COLUMN_MEANING, meaning);
-        values.put(COLUMN_ICON_DAY, iconDay);
-        values.put(COLUMN_ICON_NIGHT, iconNight);
-        values.put(COLUMN_BACK_DAY, backDay);
-        values.put(COLUMN_BACK_NIGHT, backNight);
-        return values;
+        // TODO
+        return new ContentValues();
     }
 
-    public static int getIcon(Context context, String icon) {
-        return context.getResources().getIdentifier("ic_" + icon + "_big", "drawable",
-            context.getPackageName());
+    public int getIcon(Context context) {
+        int hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        return context.getResources().getIdentifier("ic_" + (hours > 4 && hours < 21 ? iconDay :
+            iconNight) + "_big", "drawable", context.getPackageName());
     }
 
-    public static int getBackground(Context context, String icon) {
-        return context.getResources().getIdentifier("ic_" + icon, "drawable",
-            context.getPackageName());
+    public int getBackground(Context context) {
+        int hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        return context.getResources().getIdentifier("ic_" + (hours > 4 && hours < 21 ? backDay :
+            backNight), "drawable", context.getPackageName());
     }
 
     public Data clone() {

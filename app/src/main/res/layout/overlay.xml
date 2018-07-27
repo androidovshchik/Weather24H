@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name"
+        tools:src="@drawable/ic_02d1"/>
+
     <View
         android:id="@+id/center"
         android:layout_width="0dp"

@@ -89,6 +89,7 @@ public class MainService extends BaseService {
         Timber.d("> Observable.onSelectTable");
         getDisposable().add(dbManager.onSelectTable("SELECT * FROM data")
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(cursor -> {
                 try {
                     while (cursor.moveToNext()) {
