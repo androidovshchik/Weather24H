@@ -6,9 +6,9 @@
   </a>
 </p>
 
-There is a preference screen to customize colors and urls
+There is a preference screen to customize colors (with alpha available e.g. #80000000) and urls
 
-Setup them with your own api key
+Setup the last with your own api key
 
 Screenshots:
 
