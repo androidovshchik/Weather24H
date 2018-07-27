@@ -6,6 +6,8 @@
   </a>
 </p>
 
+[Download apk here](https://github.com/androidovshchik/Weather24H/releases)
+
 There is a preference screen to customize colors (with alpha available e.g. #80000000) and urls
 
 Setup the last with your own api key
@@ -14,6 +16,6 @@ Enjoy! :sun_with_face:
 
 Screenshots:
 
-<img src="art/photo_2018-07-27_16-22-08.jpg">
-
 <img src="art/photo_2018-07-27_16-22-18.jpg">
+
+<img src="art/photo_2018-07-27_16-22-08.jpg">
