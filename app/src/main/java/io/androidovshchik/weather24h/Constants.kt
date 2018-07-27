@@ -2,7 +2,7 @@ package io.androidovshchik.weather24h
 
 const val HOUR = 60 * 60 * 1000
 
-const val SERVICE_INTERVAL = 6 * HOUR
+const val SERVICE_INTERVAL = HOUR
 
 const val PREFERENCE_FORECAST = "forecast"
 const val PREFERENCE_CURRENT = "current"

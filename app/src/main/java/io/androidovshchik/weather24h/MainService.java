@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.github.androidovshchik.BaseService;
-import com.github.androidovshchik.data.DbManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,6 +20,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.androidovshchik.weather24h.current.Current;
+import io.androidovshchik.weather24h.data.DbManager;
 import io.androidovshchik.weather24h.forecast.Forecast;
 import io.androidovshchik.weather24h.model.Data;
 import io.reactivex.Observable;
@@ -50,7 +50,7 @@ public class MainService extends BaseService {
         .setDateFormat("yyyy-MM-dd HH:mm:ss")
         .create();
 
-    private DbManager dbManager = new DbManager();
+    private DbManager dbManager;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @SuppressLint("BinaryOperationInTimber")
@@ -77,7 +77,7 @@ public class MainService extends BaseService {
                 windowManager.removeView(overlay);
             }
         });
-        dbManager.openAssetsDb(getApplicationContext(), "weather.sqlite", 1);
+        dbManager = new DbManager(getApplicationContext());
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         registerReceiver(receiver, intentFilter);
         Timber.d("> startForeground");
