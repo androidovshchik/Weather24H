@@ -10,8 +10,10 @@ There is a preference screen to customize colors (with alpha available e.g. #800
 
 Setup the last with your own api key
 
+Enjoy! :sun_with_face:
+
 Screenshots:
 
-<img src="art/photo_2018-07-22_20-26-49.jpg">
+<img src="art/photo_2018-07-27_16-22-08.jpg">
 
-Enjoy! :sun_with_face:
+<img src="art/photo_2018-07-27_16-22-18.jpg">

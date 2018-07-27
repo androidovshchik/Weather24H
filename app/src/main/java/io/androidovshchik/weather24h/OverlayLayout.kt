@@ -62,7 +62,6 @@ class OverlayLayout : RelativeLayout {
         temperature.textSize = window.tempTextSize(resources.displayMetrics)
         temperature.setTextColor(clockTempColor)
         strip.layoutParams.height = window.stripHeight(resources.displayMetrics)
-        strip.setBackgroundColor(clockTempColor)
         grid.toggleGrid(false)
         grid.numberOfColumns = 8
         grid.setLineColor(Color.parseColor(preferences.getString(PREFERENCE_GRID_COLOR)))
