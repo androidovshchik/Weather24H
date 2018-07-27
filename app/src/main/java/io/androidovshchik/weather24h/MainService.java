@@ -40,6 +40,7 @@ import static io.androidovshchik.weather24h.ConstantsKt.PREFERENCE_LAST_CURRENT;
 import static io.androidovshchik.weather24h.ConstantsKt.PREFERENCE_LAST_FORECAST;
 import static io.androidovshchik.weather24h.ConstantsKt.PREFERENCE_FORECAST;
 
+@SuppressWarnings("ConstantConditions")
 public class MainService extends BaseService {
 
     private WindowManager windowManager;
@@ -143,7 +144,7 @@ public class MainService extends BaseService {
         Request request = new Request.Builder()
                 .url(preferences.getString(PREFERENCE_CURRENT_URL))
                 .build();
-        MainApplication.client.newCall(request).enqueue(new Callback() {
+        MainApplication.Companion.getClient().newCall(request).enqueue(new Callback() {
 
             @SuppressWarnings("ConstantConditions")
             @Override
@@ -174,7 +175,7 @@ public class MainService extends BaseService {
         Request request = new Request.Builder()
             .url(preferences.getString(PREFERENCE_FORECAST_URL))
             .build();
-        MainApplication.client.newCall(request).enqueue(new Callback() {
+        MainApplication.Companion.getClient().newCall(request).enqueue(new Callback() {
 
             @SuppressWarnings("ConstantConditions")
             @Override
