@@ -93,13 +93,19 @@
         android:weightSum="8"
         tools:layout_height="40dp"/>
 
+    <io.androidovshchik.weather24h.GridLineView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/strip"
+        android:layout_alignParentBottom="true" />
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/strip"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDarkest"/>
+        android:layout_alignParentBottom="true"/>
 
     <TextClock
         android:id="@+id/clock"
@@ -113,8 +119,8 @@
 
     <View
         android:id="@+id/close"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"/>
 
