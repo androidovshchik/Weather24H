@@ -2,7 +2,6 @@
 .gradle
 /local.properties
 /.idea
-app/src/main/res/values/keys.xml
 .DS_Store
 /build
 /captures

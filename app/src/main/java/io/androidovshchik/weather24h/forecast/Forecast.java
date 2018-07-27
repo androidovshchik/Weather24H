@@ -1,10 +1,10 @@
-package io.androidovshchik.weather24h.parser;
+package io.androidovshchik.weather24h.forecast;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class SiteResponse {
+public class Forecast {
 
     @SerializedName("cod")
     public String cod;

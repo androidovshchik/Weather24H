@@ -21,27 +21,27 @@ fun Point.tempTextSize(metrics: DisplayMetrics): Float {
 }
 
 fun Point.stripHeight(metrics: DisplayMetrics): Int {
-    return ViewUtil.dp2px(Math.min(x, y) * 40f / TEST_HEIGHT * 2 / metrics.density)
+    return ViewUtil.dp2px(Math.min(x, y) * 64f / TEST_HEIGHT * 2 / metrics.density)
 }
 
 fun Point.hourTextSize(metrics: DisplayMetrics): Float {
-    return Math.min(x, y) * 24f / TEST_HEIGHT * 2 / metrics.density
+    return Math.min(x, y) * 48f / TEST_HEIGHT * 2 / metrics.density
 }
 
 fun Point.valueTextSize(metrics: DisplayMetrics): Float {
-    return Math.min(x, y) * 32f / TEST_HEIGHT * 2 / metrics.density
+    return Math.min(x, y) * 50f / TEST_HEIGHT * 2 / metrics.density
 }
 
 fun Point.lineWidth(metrics: DisplayMetrics): Float {
-    return Math.min(x, y) * 6f / TEST_HEIGHT * 2 / metrics.density
+    return Math.min(x, y) * 12f / TEST_HEIGHT * 2 / metrics.density
 }
 
 fun Point.circleHoleRadius(metrics: DisplayMetrics): Float {
-    return Math.min(x, y) * 7f / TEST_HEIGHT * 2 / metrics.density
+    return Math.min(x, y) * 10f / TEST_HEIGHT * 2 / metrics.density
 }
 
 fun Point.circleRadius(metrics: DisplayMetrics): Float {
-    return Math.min(x, y) * 12f / TEST_HEIGHT * 2 / metrics.density
+    return Math.min(x, y) * 18f / TEST_HEIGHT * 2 / metrics.density
 }
 
 fun formatBearing(_bearing: Double): String {

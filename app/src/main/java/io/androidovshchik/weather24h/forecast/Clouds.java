@@ -1,4 +1,4 @@
-package io.androidovshchik.weather24h.parser;
+package io.androidovshchik.weather24h.forecast;
 
 import com.google.gson.annotations.SerializedName;
 

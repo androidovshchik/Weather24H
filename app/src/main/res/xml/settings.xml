@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="showWindow"
+        android:title="Показывать окно" />
+
+    <EditTextPreference
+        android:defaultValue="http://api.openweathermap.org/data/2.5/weather?id=543460&amp;appid=YOUR_API_KEY"
+        android:key="currentUrl"
+        android:title="Url текущей погоды"
+        android:summary="weather" />
+
+    <EditTextPreference
+        android:defaultValue="http://api.openweathermap.org/data/2.5/forecast?id=543460&amp;appid=YOUR_API_KEY"
+        android:key="forecastUrl"
+        android:title="Url прогноза погоды"
+        android:summary="forecast" />
+
+    <EditTextPreference
+        android:defaultValue="#000000"
+        android:key="topBackgroundColor"
+        android:title="Цвет фона текущих данных"
+        android:summary="Hex значение" />
+
+    <EditTextPreference
+        android:defaultValue="#ffffff"
+        android:key="iconDataColor"
+        android:title="Цвет пиктограммы и текста"
+        android:summary="Hex значение" />
+
+    <EditTextPreference
+        android:defaultValue="#009688"
+        android:key="clockTempColor"
+        android:title="Цвет часов и температуры"
+        android:summary="Hex значение" />
+
+    <EditTextPreference
+        android:defaultValue="#1a237e"
+        android:key="graphBackgroundColor"
+        android:title="Цвет фона графика"
+        android:summary="Hex значение" />
+
+    <EditTextPreference
+        android:defaultValue="#ffffff"
+        android:key="gridColor"
+        android:title="Цвет сетки"
+        android:summary="Hex значение" />
+
+    <EditTextPreference
+        android:defaultValue="#ffffff"
+        android:key="lineColor"
+        android:title="Цвет линии графика"
+        android:summary="Hex значение" />
+
+</PreferenceScreen>

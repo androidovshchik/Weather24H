@@ -6,15 +6,11 @@
   </a>
 </p>
 
-To build this project add string resource like
+There is a preference screen to customize colors and urls
 
-```xml
-<string name="owm_org_api_key">my_api_key_here</string>
-```
+Setup them with your own api key
 
-Where replace `my_api_key_here` with your own api key on [this site](https://openweathermap.org)
-
-Screenshot:
+Screenshots:
 
 <img src="art/photo_2018-07-22_20-26-49.jpg">
 

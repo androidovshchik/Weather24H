@@ -1,11 +1,11 @@
-package io.androidovshchik.weather24h.parser;
+package io.androidovshchik.weather24h.current;
 
 import com.google.gson.annotations.SerializedName;
 
 public class Weather {
 
     @SerializedName("id")
-    public int id;
+    public Integer id;
     @SerializedName("main")
     public String main;
     @SerializedName("description")

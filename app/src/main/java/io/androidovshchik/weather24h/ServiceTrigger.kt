@@ -15,7 +15,7 @@ class ServiceTrigger : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
         Timber.d("ServiceTrigger")
         preferences = Preferences(context)
-        if (preferences.has(PREFERENCE_ENABLE)) {
+        if (preferences.has(PREFERENCE_SHOW_WINDOW)) {
             AlarmUtil.next(context, SERVICE_INTERVAL, ServiceTrigger::class.java)
             ServiceUtil.forceStartService(context, MainService::class.java, true)
         } else {
