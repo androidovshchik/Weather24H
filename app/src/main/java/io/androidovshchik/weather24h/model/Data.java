@@ -14,11 +14,15 @@ public class Data extends Row implements Cloneable {
     public static final String COLUMN_MEANING = "meaning";
     public static final String COLUMN_ICON_DAY = "icon_day";
     public static final String COLUMN_ICON_NIGHT = "icon_night";
+    public static final String COLUMN_BACK_DAY = "back_day";
+    public static final String COLUMN_BACK_NIGHT = "back_night";
 
     public int apiId;
     public String meaning;
     public String iconDay;
     public String iconNight;
+    public String backDay;
+    public String backNight;
 
     @NotNull
     @Override
@@ -33,6 +37,8 @@ public class Data extends Row implements Cloneable {
         meaning = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MEANING));
         iconDay = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ICON_DAY));
         iconNight = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ICON_NIGHT));
+        backDay = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BACK_DAY));
+        backNight = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BACK_NIGHT));
     }
 
     @NotNull
@@ -46,12 +52,18 @@ public class Data extends Row implements Cloneable {
         values.put(COLUMN_MEANING, meaning);
         values.put(COLUMN_ICON_DAY, iconDay);
         values.put(COLUMN_ICON_NIGHT, iconNight);
+        values.put(COLUMN_BACK_DAY, backDay);
+        values.put(COLUMN_BACK_NIGHT, backNight);
         return values;
     }
 
     public static int getIcon(Context context, String icon) {
-        String name = "ic_" + icon + "_big";
-        return context.getResources().getIdentifier(name, "drawable",
+        return context.getResources().getIdentifier("ic_" + icon + "_big", "drawable",
+            context.getPackageName());
+    }
+
+    public static int getBackground(Context context, String icon) {
+        return context.getResources().getIdentifier("ic_" + icon, "drawable",
             context.getPackageName());
     }
 

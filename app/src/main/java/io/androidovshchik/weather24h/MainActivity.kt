@@ -76,7 +76,7 @@ class MainActivity : BasePActivity() {
         }
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "message/rfc822"
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("vladkalyuzhnyu@gmail.com"))
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>())
         intent.putExtra(Intent.EXTRA_SUBJECT, title)
         intent.putExtra(Intent.EXTRA_TEXT, logs)
         try {

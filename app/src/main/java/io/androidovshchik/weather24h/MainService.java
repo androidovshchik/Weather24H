@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.github.androidovshchik.BaseService;
+import com.github.androidovshchik.data.DbManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.androidovshchik.weather24h.current.Current;
 import io.androidovshchik.weather24h.forecast.Forecast;
+import io.androidovshchik.weather24h.model.Data;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -48,6 +50,8 @@ public class MainService extends BaseService {
         .setDateFormat("yyyy-MM-dd HH:mm:ss")
         .create();
 
+    private DbManager dbManager = new DbManager();
+
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @SuppressLint("BinaryOperationInTimber")
         @SuppressWarnings("ConstantConditions")
@@ -73,6 +77,7 @@ public class MainService extends BaseService {
                 windowManager.removeView(overlay);
             }
         });
+        dbManager.openAssetsDb(getApplicationContext(), "weather.sqlite", 1);
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         registerReceiver(receiver, intentFilter);
         Timber.d("> startForeground");
@@ -81,40 +86,53 @@ public class MainService extends BaseService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Timber.d("> onStartCommand");
-        if (preferences.has(PREFERENCE_CURRENT)) {
-            try {
-                Current current = gson.fromJson(preferences.getString(PREFERENCE_CURRENT),
-                    Current.class);
-                overlay.bindTopPart(current);
-            } catch (Exception e) {
-                Timber.e(e);
-                preferences.remove(PREFERENCE_CURRENT);
-            }
-        }
-        if (preferences.has(PREFERENCE_FORECAST)) {
-            try {
-                Forecast forecast = gson.fromJson(preferences.getString(PREFERENCE_FORECAST),
-                    Forecast.class);
-                overlay.bindStripBottomPart(forecast);
-            } catch (Exception e) {
-                Timber.e(e);
-                preferences.remove(PREFERENCE_FORECAST);
-            }
-        }
-        Timber.d("> addOverlay 1");
-        addOverlay();
-        Timber.d("> Observable.interval");
-        getDisposable().add(Observable.interval(0, 5, TimeUnit.MINUTES)
+        Timber.d("> Observable.onSelectTable");
+        getDisposable().add(dbManager.onSelectTable("SELECT * FROM data")
             .subscribeOn(Schedulers.io())
-            .subscribe(value -> {
-                long now = System.currentTimeMillis();
-                if (now - preferences.getLong(PREFERENCE_LAST_CURRENT, 0) >= HOUR) {
-                    syncCurrent();
+            .subscribe(cursor -> {
+                try {
+                    while (cursor.moveToNext()) {
+                        Data item = new Data();
+                        item.parseCursor(cursor);
+                        overlay.getItems().add(item);
+                    }
+                } finally {
+                    cursor.close();
                 }
-                if (now - preferences.getLong(PREFERENCE_LAST_FORECAST, 0) >= HOUR) {
-                    syncForecast();
+                if (preferences.has(PREFERENCE_CURRENT)) {
+                    try {
+                        Current current = gson.fromJson(preferences.getString(PREFERENCE_CURRENT),
+                            Current.class);
+                        overlay.bindTopPart(current);
+                    } catch (Exception e) {
+                        Timber.e(e);
+                        preferences.remove(PREFERENCE_CURRENT);
+                    }
                 }
+                if (preferences.has(PREFERENCE_FORECAST)) {
+                    try {
+                        Forecast forecast = gson.fromJson(preferences.getString(PREFERENCE_FORECAST),
+                            Forecast.class);
+                        overlay.bindStripBottomPart(forecast);
+                    } catch (Exception e) {
+                        Timber.e(e);
+                        preferences.remove(PREFERENCE_FORECAST);
+                    }
+                }
+                Timber.d("> addOverlay 1");
+                addOverlay();
+                Timber.d("> Observable.interval");
+                getDisposable().add(Observable.interval(0, 5, TimeUnit.MINUTES)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(value -> {
+                        long now = System.currentTimeMillis();
+                        if (now - preferences.getLong(PREFERENCE_LAST_CURRENT, 0) >= HOUR) {
+                            syncCurrent();
+                        }
+                        if (now - preferences.getLong(PREFERENCE_LAST_FORECAST, 0) >= HOUR) {
+                            syncForecast();
+                        }
+                    }));
             }));
         return super.onStartCommand(intent, flags, startId);
     }
